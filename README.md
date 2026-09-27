@@ -1,3 +1,59 @@
+# Deskwise · Single-file AI Desk Assistant
+
+The new **desk/study assistant** is in [`public/desk-assistant.html`](public/desk-assistant.html). It is a complete, standalone HTML/CSS/JavaScript application: no React build, package installation, backend, API key, or audio assets are required to run this file. The original CoPilot driver dashboard remains available at the repository root.
+
+## Run the desk assistant in VS Code
+
+Download or clone this branch, then choose either option:
+
+**Option A — VS Code Live Server:** open `public/desk-assistant.html` and choose **Open with Live Server**. Open the resulting localhost URL in Chrome or Edge and allow camera access.
+
+**Option B — Python static server (no Node.js needed):**
+
+```bash
+cd Face-Analyzer
+python -m http.server 8000 --directory public
+# On Windows you can use: py -m http.server 8000 --directory public
+```
+
+Open **http://localhost:8000/desk-assistant.html**.
+
+**Option C — existing Vite project:**
+
+```bash
+npm ci
+npm run dev
+```
+
+Open **http://localhost:5173/desk-assistant.html** (not just the root URL).
+
+Use localhost or HTTPS, not a double-clicked `file://` URL. Initial vision-model and runtime downloads need internet access. Chrome/Edge are recommended; floating video and screen wake lock depend on browser support. Embedded previews may need to be opened directly for camera permissions.
+
+## Included
+
+- Local MediaPipe Face Landmarker inference, capped at 5/8/12 FPS, 640×480 camera request, optional sparse landmark overlay.
+- Pixel-correct bilateral EAR, timestamp-based continuous closure, hysteresis, stale-frame and quality checks.
+- Web Audio synthesized alarm with adjustable volume, delay, sensitivity, mute, and a one-second sound test. A bounded audio-clock envelope prevents indefinitely stuck sound if JavaScript freezes.
+- Neutral, Happy, Stressed, Surprised, and Tired expression-rule scores, explicitly **not calibrated emotion probabilities**.
+- Eye-openness sample percentage and a recent EAR chart, explicitly **not a measure of focus or productivity**.
+- Contextual well-being cards, customizable in-page break reminders, optional screen wake lock and picture-in-picture camera view.
+- Synthetic demo: closure during seconds 12–16 of each 22-second cycle, default alarm around second 14. With a delay longer than four seconds this demo intentionally will not trigger.
+- In-memory event history and explicit JSON export. No camera image recording or upload.
+
+### Background execution: important limitation
+
+Unlike the original driver dashboard, the desk assistant **does not stop simply because the tab is hidden**. It uses a timer to attempt continued inference. However, a webpage cannot guarantee background execution: browsers throttle timers, pause frames, freeze tabs, and suspend devices. A gap longer than 1.5 seconds resets closure continuity; unknown time is never counted as proof of sleep. This intentionally prioritizes avoiding fabricated detections and can miss real closure during suspension. No alarm can be triggered while the page is frozen.
+
+Keep the page visible alongside your work for more dependable operation. Floating video and screen wake lock are conveniences, not background guarantees. A dependable always-on requirement needs a native desktop process and representative device testing, not just a browser file. Break reminders are in-page and may also be delayed when hidden. The app is an experimental desk-awareness tool, not a medical device, sleep diagnosis, or guarantee of wakefulness.
+
+### Validation
+
+`npm test` runs both the original vision tests and tests that extract and execute the actual inline JavaScript from the standalone file. Desk tests cover pixel-correct EAR, continuous closure, opening/reset behavior, long background gaps, invalid tracking, and expression-score bounds. A lightweight DOM harness tests logic, not browser rendering or real hardware. `npm run build` also copies the standalone file to `dist/desk-assistant.html`.
+
+Real webcam inference, audio output, picture-in-picture, and background throttling must be verified on the user's actual browser/device. Automated browser/model downloads were blocked by TLS network failures in this sandbox; no production/hardware validation is claimed.
+
+---
+
 # CoPilot · AI Driver Awareness & Well-Being Monitor
 
 A complete, client-side React application for webcam-based eye-closure monitoring, facial-expression indicators, and optional well-being feedback. Built with React, Vite, MediaPipe Face Landmarker, Canvas, and the Web Audio API. No backend, API key, video upload, or external audio asset is needed.
