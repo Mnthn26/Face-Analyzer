@@ -1,4 +1,4 @@
-> **Want a public website instead of running VS Code?** See [DEPLOY.md](DEPLOY.md). The deployment build (`npm run build`) now publishes Deskwise as the homepage in `site/`. Netlify and Vercel configuration is included; use branch `arena/01a0e1c6-face-analyzer`, not `main`. The legacy React driver build is available with `npm run build:driver`.
+> **Use Deskwise as a public website with GitHub Pages:** follow the one-time owner setup in [DEPLOY.md](DEPLOY.md). No Netlify/Vercel account or local server is required for normal use after publishing. The Pages workflow tests and deploys branch `arena/01a0e1c6-face-analyzer`. **Publishing is currently blocked by missing repository-administration permissions; the repository is still private.**
 
 # Deskwise · Single-file AI Desk Assistant
 

@@ -1,60 +1,54 @@
-# Get your public Deskwise website
+# Publish Deskwise using GitHub only
 
-The published homepage is the **live-camera desk assistant**, not the original driver dashboard. Demo is optional. No API key, backend, database, or paid AI service is required. The site needs HTTPS for webcam access away from localhost.
+Normal use will be through your HTTPS website. You will not need Netlify, Vercel, VS Code, or a local server. GitHub hosts the files, while camera analysis runs in the visitor's browser. Initial model/runtime assets still download from jsDelivr and Google Cloud Storage; you do not need accounts with either provider.
 
-## Quickest: upload the prepared website
+## One-time repository-owner setup
 
-1. Download `deskwise-website.zip` provided in Arena and **extract it**.
-2. Sign into your own Netlify account at https://app.netlify.com/.
-3. Open https://app.netlify.com/drop (or choose **Add new project → Deploy manually**).
-4. Drag the extracted folder containing **index.html** into the upload area. Upload the built website, not the GitHub repository.
-5. Netlify will show your HTTPS `*.netlify.app` URL after publishing. Open that URL directly, outside an iframe.
-6. Choose **Start camera**, allow permission, then **Test alarm** at a comfortable volume.
+The Arena GitHub app returned **HTTP 403: Resource not accessible by integration** for both changing visibility and configuring Pages. Consequently, the repository is **still private** and Pages is **not yet enabled**. Code pushes are authorized, but repository administration is not. You can reconnect GitHub in Arena with the needed permissions, or complete these owner-only steps yourself:
 
-You do not need VS Code or a local server once the website is published. You can rename the site or add a domain in your hosting dashboard. Availability, free-tier limits, and account requirements are controlled by the provider.
+1. Open https://github.com/Mnthn26/Face-Analyzer/settings.
+2. Under **Danger Zone → Change repository visibility**, choose **Public**, review GitHub's warnings, and confirm. Public visibility exposes all committed content/history; do not publish secrets. A limited automated history scan found no obvious private keys or recognized token patterns, but this is not a comprehensive secret audit.
+3. Open https://github.com/Mnthn26/Face-Analyzer/settings/pages.
+4. Under **Build and deployment → Source**, select **GitHub Actions**. Do not select `main` as a branch publishing source—the website is built by the workflow on `arena/01a0e1c6-face-analyzer`.
+5. Open https://github.com/Mnthn26/Face-Analyzer/actions and locate **Publish Deskwise website**. If its initial run failed before Pages was enabled, choose **Re-run all jobs** on that run. If no run exists, ask the agent to trigger another push on the session branch after setup. Workflow dispatch is also provided, but GitHub may not list its manual button until a workflow exists on the default branch.
+6. If the deploy job says the environment disallows the branch, open **Settings → Environments → github-pages**, and permit **arena/01a0e1c6-face-analyzer** under deployment branch rules. Do not change unrelated environment protections.
+7. Wait for **Test and build static website** and **Publish to GitHub Pages** to succeed. The deployment job shows the actual public URL.
 
-The archive is a snapshot: to publish later changes, regenerate the site and upload it again, or use Git integration below. Never upload `.git`, environment files, or the whole repository to a static host.
+Expected default URL **after successful deployment**:
 
-## Automatic updates from this private GitHub repository
+**https://mnthn26.github.io/Face-Analyzer/**
 
-### Netlify
+This is an expected URL, not a claim that it is already live. A custom domain can be configured later through GitHub Pages. It is not required.
 
-1. In Netlify, add/import an existing project from GitHub.
-2. Authorize Netlify through GitHub's own interface for `Mnthn26/Face-Analyzer`. Keep the repository private.
-3. Select branch **arena/01a0e1c6-face-analyzer** as the branch to deploy, **not main**.
-4. Build command: `node scripts/build-site.mjs`.
-5. Publish directory: `site`.
-6. Deploy. `netlify.toml` contains these settings for automatic detection.
+## Architecture and operational protections
 
-Future pushes to this branch will rebuild the website when the Git integration is configured.
+- `.github/workflows/pages.yml` runs on pushes to the fixed working branch; deployment is also guarded to that branch.
+- Build/test job has only read access to repository contents. Deploy job has `pages: write` and `id-token: write`, using GitHub's short-lived workflow identity rather than stored credentials.
+- No package installation is needed for the Node.js algorithm tests or static build. Tests must pass before deployment.
+- A concurrency group prevents overlapping deployment jobs. An active deploy is not canceled midway by a newer push.
+- `scripts/build-site.mjs` cleans only the fixed generated `site/` directory and copies the standalone website, never the repository, tests, credentials, or `.git`.
+- `DESKWISE_BASE_PATH=/Face-Analyzer/` handles GitHub's project URL prefix. The prefix is validated against external URLs, path traversal, and HTML injection before insertion into the generated error page.
+- HTML/CSS/JavaScript remain a standalone application. Session information lives in memory. Camera frames are not uploaded.
+- GitHub Pages does not apply Netlify `_headers` rules. Those remain for optional alternate hosting, but are not claimed as active response headers on Pages.
 
-### Vercel
+## Verification
 
-Import the same GitHub repository, authorize access, use the **Other** framework preset, and set the production branch to **arena/01a0e1c6-face-analyzer** in project Git settings. Deploy/redeploy that branch. The included `vercel.json` selects build command `node scripts/build-site.mjs` and output directory `site`. If the first import built `main`, change the branch and redeploy before testing.
+1. Visit the deployment URL directly in Chrome/Edge (not an iframe). Confirm **deskwise** and **Start camera** appear at the root of the project path.
+2. Grant camera permission, wait for the model to load, and confirm real tracking rather than a DEMO label.
+3. Test alarm at a comfortable device volume. Verify intentional prolonged closure while seated and that reopening clears the warning.
+4. End the session and confirm the browser camera indicator turns off.
+5. Try a nonexistent page under `/Face-Analyzer/`; its home link should return to the assistant.
 
-Do not share passwords, tokens, or authentication codes in chat. Hosting authorization happens on your own provider's site.
+Background monitoring remains best-effort: browsers can suspend hidden tabs and prevent new alarms. Public hosting does not remove that limitation. Real webcam/audio behavior and deployment success still require verification on the actual browser/host.
 
-## Build or inspect locally
+## Local development (optional, not needed to use the public website)
 
 ```bash
-# Node.js 20+; no package install required for this static build
-node scripts/build-site.mjs
-
-# Serve the production website locally (Python 3)
-python -m http.server 8000 --directory site
+npm test
+# GitHub project path; omit the environment variable for hosting at /
+DESKWISE_BASE_PATH=/Face-Analyzer/ node scripts/build-site.mjs
 ```
 
-Visit http://localhost:8000. Alternatively, `npm ci && npm run build && npm run preview` serves the production output with Vite. `npm run build:driver` retains the original React driver's build in `dist/`.
+The Pages workflow handles these commands automatically. For local root hosting use `node scripts/build-site.mjs`, then `python -m http.server 8000 --directory site` and open http://localhost:8000.
 
-## Deployment checks
-
-- The root URL shows **deskwise** and a **Start camera** button.
-- HTTPS is active, camera permission is granted, and no browser extension blocks jsDelivr or Google Cloud Storage.
-- The vision model downloads successfully; camera frames remain in the browser.
-- Test alarm works with device sound enabled. Verify intentional eye closure while seated, then verify reopening clears the warning.
-- End session releases the camera (browser camera indicator turns off).
-- Test the device/browser you actually intend to use. Hidden tabs may be throttled or suspended; there is no guaranteed background alarm.
-
-## Current publishing status
-
-The website and provider configuration are ready, but **an enduring public deployment has not been created from Arena**. The connected GitHub integration returned HTTP 403 for Pages configuration, and this workspace has no authorized Netlify/Vercel account. Your repository has not been made public and no hosting charges have been authorized. Completing the account-side upload/import above is necessary to obtain your public URL.
+The existing Netlify/Vercel configuration is retained only as an optional alternative; neither is required for this GitHub-only path.
