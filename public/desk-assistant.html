@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111715">
+<meta name="description" content="Your private, on-device desk companion with live webcam eye-closure alerts, expression signals, and gentle break reminders.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Deskwise · A little focus, a little care</title>
+<style>
+:root{color-scheme:dark;--bg:#111715;--card:#1b2420;--line:#314037;--text:#e8efe9;--muted:#9bafa0;--green:#c1ef9d;--red:#ffb1a8;font-family:system-ui,-apple-system,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#28372c;color:var(--text);border-radius:8px;padding:10px 14px;font-size:13px}button:hover{background:#364b39}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}button.primary{background:var(--green);color:#20301c;border-color:var(--green);font-weight:650}button.danger{color:var(--red)}header{border-bottom:1px solid var(--line);padding:22px max(24px,calc((100% - 1180px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}.logo{font-weight:750;letter-spacing:-1px;font-size:24px}.logo i{font-style:normal;color:var(--green)}.pill{font-size:11px;border:1px solid var(--line);padding:7px 10px;border-radius:30px;color:var(--muted)}main{max-width:1228px;margin:auto;padding:34px 24px}h1{font-size:clamp(26px,4vw,37px);letter-spacing:-1.3px;font-weight:600;margin:8px 0 10px}h2{font-size:14px;font-weight:600;margin:0}p{line-height:1.7;color:var(--muted);font-size:13px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--green)}.intro{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;gap:20px}.intro p{margin:0}.session{font-variant-numeric:tabular-nums;font-size:25px;text-align:right}.session small{display:block;font-size:9px;letter-spacing:1.4px;color:var(--muted);margin-top:5px}.notice{border:1px solid #4f5035;background:#292e20;color:#c4cdad;padding:12px 16px;border-radius:8px;font-size:12px;line-height:1.6;margin-bottom:20px}.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(310px,1fr);gap:20px}.card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}.head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:19px 20px}.tag{font-size:9px;color:var(--green);letter-spacing:1px}.stage{margin:0 12px;aspect-ratio:16/10;position:relative;background:radial-gradient(ellipse,#2b4032,#131e18);border-radius:8px;overflow:hidden;display:grid;place-items:center}.stage video,.stage canvas{position:absolute;width:100%;height:100%;object-fit:contain;transform:scaleX(-1)}.stage canvas{pointer-events:none}.standby{text-align:center;color:#9ab78f;padding:25px}.standby .face{width:94px;height:116px;border:1px solid #6d9065;border-radius:45% 45% 48% 48%;margin:0 auto 24px;position:relative;box-shadow:0 0 70px #b9ef9217;display:flex;align-items:center;justify-content:center;gap:22px}.face:after{content:'';position:absolute;bottom:29px;width:28px;border-bottom:1px solid #9abd8d;border-radius:50%;height:10px}.face i{width:14px;height:7px;border:1px solid #b9e69e;border-radius:50%;margin-top:-17px}.face.closed i{height:1px}.standby strong{display:block;font-size:15px;font-weight:500}.standby small{display:block;font-size:11px;margin-top:9px}.status-chip{position:absolute;top:13px;left:13px;padding:7px 10px;background:#111b15df;color:#cae3ba;border:1px solid #43593b;border-radius:5px;font-size:10px;max-width:90%}.overlay{position:absolute;inset:0;background:#832e32ed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px;gap:15px;color:white}.overlay strong{font-size:25px}.overlay span{font-size:13px}.overlay[hidden],.standby[hidden]{display:none}.controls{padding:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.controls>div{display:flex;align-items:center;gap:8px}.check{font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:center}input{accent-color:var(--green)}.state{text-align:center;padding:12px 20px 25px}.state .eye{font-size:40px;color:var(--green)}.state h3{font-size:27px;font-weight:550;margin:8px 0}.state p{font-size:11px;margin:0}.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px 20px}.metric{border:1px solid var(--line);border-radius:8px;padding:14px}.metric small{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}.metric strong{font-size:23px;font-weight:500;font-variant-numeric:tabular-nums}.metric strong span{font-size:11px;color:var(--muted)}.meter{height:5px;border-radius:5px;background:#364c38;margin:0 20px 12px;overflow:hidden}.meter>div{height:100%;width:0;background:var(--green);transition:width .2s}.subnote{font-size:10px;margin:0 20px 20px;color:var(--muted);line-height:1.7}.rows{padding:0 20px 18px}.row{display:flex;align-items:center;gap:13px;margin:15px 0;font-size:11px}.row>span{width:67px;color:#b4c5b8}.bar{height:5px;border-radius:6px;background:#344238;flex:1;overflow:hidden}.bar>div{height:100%;width:0;background:var(--green);transition:width .5s}.row>output{width:33px;text-align:right;font-size:10px;color:var(--muted)}.expression-note{border-top:1px solid var(--line);padding:12px 20px;font-size:10px;color:var(--muted);line-height:1.6}.wellbeing{background:#d4e5c5;color:#2b422a;padding:24px;display:flex;flex-direction:column}.wellbeing .eyebrow{color:#526d45;font-size:9px}.wellbeing h2{font-size:27px;letter-spacing:-.7px;margin:23px 0 12px;max-width:300px;line-height:1.2;font-weight:550}.wellbeing p{color:#5d7553;margin:0 0 22px;font-size:12px}.break{margin-top:auto;border-top:1px solid #b5caaa;padding-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px}.break strong{display:block;font-size:15px;margin-top:7px;font-weight:500}.wellbeing button{background:#e6f0da;border:1px solid #b4c7a5;color:#354c2d}.bottom{margin-top:20px}.settings{display:grid;grid-template-columns:1fr 1fr 1fr;gap:25px;padding:0 20px 20px}.setting{font-size:11px;color:#b5c6b6}.setting label{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:13px 0}.setting output{color:var(--green);white-space:nowrap}.setting input[type=range]{width:100%}.setting small{display:block;line-height:1.65;font-size:10px;color:var(--muted);margin-top:12px}.setting select{width:100%;padding:8px;border:1px solid #445740;border-radius:5px;background:#263529;color:var(--text);font-size:12px}.chart-wrap{padding:0 20px 18px}.chart{height:85px;width:100%;border-bottom:1px solid var(--line)}.chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin-top:8px}.chart-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.help{margin-top:20px;padding:17px 20px}.help summary{cursor:pointer;font-size:12px;color:#b7c6b7}.help p,.help li{font-size:12px;color:var(--muted);line-height:1.8}.help strong{color:#dae7d6}.footer{display:flex;justify-content:space-between;gap:20px;margin-top:22px;font-size:10px;color:#7f9582;line-height:1.7}.error{background:#442b27;color:#ffccc2;border:1px solid #805449}.toast{position:fixed;bottom:25px;right:25px;max-width:350px;z-index:10;padding:20px;background:#d9edc8;color:#2c4524;border-radius:10px;border:1px solid #acc597;box-shadow:0 10px 50px #0008}.toast p{color:#516c45}.toast button{color:#2c4524;background:#bfdba9}.health{padding:0 20px 18px;display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}.event-list{padding:0 20px 20px;max-height:170px;overflow:auto}.event{display:flex;gap:12px;justify-content:space-between;font-size:11px;border-bottom:1px solid var(--line);padding:10px 0;color:var(--muted)}.event time{white-space:nowrap}.events-empty{font-size:12px;color:var(--muted)}@media(max-width:780px){header{padding:18px 20px}main{padding:26px 16px}.grid{grid-template-columns:1fr}.settings{grid-template-columns:1fr;gap:10px}.intro{align-items:flex-start}.session{font-size:18px;margin-top:24px}.session small{font-size:8px}.intro p{font-size:11px}.pill{font-size:9px}.stage{aspect-ratio:4/3}.footer{flex-direction:column;gap:8px}.toast{left:18px;right:18px;max-width:none}.controls{padding:13px}.controls button{font-size:11px;padding:9px}.head{padding:17px}.wellbeing h2{max-width:350px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="logo"><i>◈</i> deskwise</div><span class="pill">Private by design · on-device vision</span></header>
+<main>
+<div class="intro"><div><span class="eyebrow">YOUR DESK. A LITTLE MORE BALANCE.</span><h1>A little focus, a little care.</h1><p>A gentle companion for long study sessions and deep work.</p></div><div class="session"><span id="sessionTime">00:00:00</span><small>SESSION TIME</small></div></div>
+<div class="notice" id="backgroundNotice">Background monitoring is best-effort: browsers can suspend hidden tabs. Keep this window visible alongside your work for more dependable monitoring. No webpage can guarantee a sleep alarm.</div>
+<div id="error" class="notice error" role="alert" hidden></div>
+<div class="grid">
+<section class="card"><div class="head"><h2>Your desk view</h2><span id="modeLabel" class="tag">CAMERA OFF</span></div><div class="stage"><video id="video" autoplay muted playsinline></video><canvas id="mesh"></canvas><div class="standby" id="standby"><div class="face" id="demoFace"><i></i><i></i></div><strong id="standbyTitle">Ready when you are.</strong><small id="standbyText">Your camera feed never leaves this device.</small></div><div id="quality" class="status-chip">Face tracking · standby</div><div id="alarmOverlay" class="overlay" role="alert" hidden><strong>Time to wake up.</strong><span>Prolonged eye closure detected. Take a real rest if you’re tired.</span></div></div><div class="controls"><label class="check"><input type="checkbox" id="showMesh" checked>Landmarks</label><div><button id="demo">Try demo</button><button id="pip" title="Floating camera view; not a guarantee of background execution" disabled>Float camera ↗</button><button id="start" class="primary">Start camera</button><button id="stop" class="danger" hidden>End session</button></div></div></section>
+<section class="card"><div class="head"><h2>Awareness check</h2><span class="tag" id="trackingLabel">READY</span></div><div class="state"><div class="eye">◉</div><h3 id="state">Standby</h3><p id="stateDetail">Connect your camera or explore a demo.</p></div><div class="meter"><div id="closureBar"></div></div><p class="subnote">Continuous closure toward your alarm threshold</p><div class="metrics"><div class="metric"><small>Eye aspect ratio</small><strong id="ear">—</strong></div><div class="metric"><small>Continuous closure</small><strong><output id="closedTime">0.0</output><span> seconds</span></strong></div><div class="metric"><small>Open-eye samples</small><strong id="openness">—</strong></div><div class="metric"><small>Safety alerts</small><strong id="alertCount">0</strong></div></div><p class="subnote">Open-eye samples are an observable signal, not a measure of concentration or productivity.</p><div class="health"><span id="fps">— inference fps</span><span id="audioStatus">Audio not enabled</span></div></section>
+<section class="card"><div class="head"><h2>Expression signals</h2><span id="dominant" class="tag">WAITING</span></div><div class="rows" id="expressionRows"></div><div class="expression-note">Rule-based facial movement scores, not calibrated emotion probabilities. Only you know how you feel.</div></section>
+<section class="card wellbeing"><span class="eyebrow">A MOMENT FOR YOU</span><h2 id="wellTitle">Good work starts with taking care.</h2><p id="wellText">Settle into a comfortable posture, keep water nearby, and give yourself permission to take a break.</p><div class="break"><div><span>Next gentle break reminder</span><strong id="breakCountdown">After 25 minutes of a session</strong></div><button id="takeBreak">Take a break</button></div></section>
+</div>
+<section class="card bottom"><div class="head"><h2>Make it work for you</h2><button id="testAlarm">Test alarm · 1 second</button></div><div class="settings"><div class="setting"><label for="threshold">Eye closure sensitivity <output id="thresholdValue">0.22 EAR</output></label><input type="range" id="threshold" min="0.12" max="0.32" step="0.01" value="0.22"><small>Higher EAR thresholds are more sensitive, but may mistake squinting or downward gaze for closed eyes.</small><label for="delay">Continuous closure delay <output id="delayValue">2.0 s</output></label><input id="delay" type="range" min="1" max="5" step="0.1" value="2"></div><div class="setting"><label for="volume">Alarm volume <output id="volumeValue">55%</output></label><input id="volume" type="range" min="0" max="100" value="55"><small>Check your device volume. Software cannot override muted speakers or guarantee an audible alarm.</small><label class="check"><span>Automatic alarm sound</span><input type="checkbox" id="sound" checked></label><label class="check"><span>Keep screen awake when supported</span><input type="checkbox" id="wake"></label></div><div class="setting"><label for="breakInterval">Gentle break reminder</label><select id="breakInterval"><option value="0">Off</option><option value="20">Every 20 minutes</option><option value="25" selected>Every 25 minutes</option><option value="45">Every 45 minutes</option><option value="60">Every 60 minutes</option></select><small>Reminders stay inside this page. No notification permissions, tracking, or account needed.</small><label for="rate">Inference budget</label><select id="rate"><option value="8" selected>Balanced · up to 8 FPS</option><option value="5">Low resource · up to 5 FPS</option><option value="12">Responsive · up to 12 FPS</option></select></div></div></section>
+<div class="grid bottom"><section class="card"><div class="head"><h2>Eye openness over time</h2><span class="tag">LAST 60 SAMPLES</span></div><div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 600 85" preserveAspectRatio="none" role="img" aria-label="Recent eye aspect ratio samples; gaps mean missing tracking"><path d="M0 15H600 M0 42H600 M0 70H600" stroke="#334638" stroke-dasharray="3 5"/><path id="thresholdLine" fill="none" stroke="#c6b485" stroke-dasharray="4 5"/><path id="chartLine" fill="none" stroke="#c1ef9d" stroke-width="2"/></svg><div class="chart-labels"><span>Older · approximately 1 sample/second</span><span>Now</span></div></div></section><section class="card"><div class="head"><h2>Session moments</h2><button id="export">Export JSON</button></div><div class="event-list" id="events"><p class="events-empty">Your session moments will appear here.</p></div></section></div>
+<details class="card help"><summary>How it works · privacy, background behavior & limitations</summary><p><strong>Eye closure:</strong> MediaPipe tracks facial landmarks locally. We calculate EAR as (two vertical eye distances) / (two × horizontal distance) using pixel coordinates, averaged across both eyes. A timestamp-based timer triggers after continuous low EAR. A small hysteresis band reduces jitter.</p><p><strong>Background behavior:</strong> Monitoring uses a timer rather than requestAnimationFrame so it can attempt to continue in hidden tabs. Browsers still throttle timers, pause camera frames, freeze tabs, or suspend devices. Gaps longer than 1.5 seconds invalidate continuity, rather than treating missing time as closed eyes. A frozen page cannot sound a new alarm or update its own status. Picture-in-picture and screen wake lock are conveniences, not guarantees. For dependable always-on behavior, a native desktop companion is required.</p><p><strong>Expression matrix:</strong> Happy = mouth smile; stressed = brow lowering and mouth press; surprised = jaw opening and eye widening; tired = low EAR; neutral = complement of strongest signal. Percentages are smoothed rule scores, not evidence of internal emotion. No actual concentration score is inferred.</p><p><strong>Quality checks:</strong> Poor lighting, large head turn/roll, small faces, multiple faces, and stale video disable eye-closure timing. Glasses, occlusion, facial differences, and backlighting can still cause false positives or missed detections. Calibrate while seated; do not rely on this as a medical or safety device.</p><p><strong>Privacy:</strong> No video recording, analytics, storage, or uploads. Initial model, JavaScript, and WASM downloads contact jsDelivr and Google Cloud Storage; those hosts see ordinary connection metadata but not camera frames. Everything else runs in memory. Export is explicit and contains settings, sampled EAR history, and events—not images. This file needs internet for its initial vision dependencies.</p><p><strong>Setup:</strong> Serve this file over localhost or HTTPS. Grant camera permission. In an embedded preview, open the page directly if camera or picture-in-picture permission is blocked. Test sound at a comfortable volume. The demo simulates prolonged closure between seconds 12 and 16 of a 22-second cycle.</p></details>
+<div class="footer"><span>Built for desk awareness. Not a medical device, sleep diagnosis, or guarantee of wakefulness.</span><span>No account. No uploads. Just your space.</span></div>
+</main>
+<div class="toast" id="breakToast" role="status" hidden><strong>A small pause can go a long way.</strong><p>Look away from the screen, relax your shoulders, and stand or stretch if comfortable. If you’re sleepy, choose real rest.</p><button id="dismissBreak">Got it · reset reminder</button></div>
+<script type="module">
+// This is a self-contained application file. Only model/runtime assets load remotely.
+// Inference is deliberately capped; camera images are never transmitted or stored.
+const $ = id => document.getElementById(id);
+const video = $('video'), canvas = $('mesh'), ctx = canvas.getContext('2d');
+const EYES = [[33,160,158,133,153,144],[362,385,387,263,373,380]];
+const EMOTIONS = ['Neutral','Happy','Stressed','Surprised','Tired'];
+const tips = {
+  Neutral:['A little rhythm goes a long way.','One task at a time is enough. Keep your space comfortable and let small steps count.'],
+  Happy:['Let the good energy stay.','Enjoy this moment. Keep a comfortable pace and remember to give your eyes a break.'],
+  Stressed:['Make a little room to breathe.','Facial tension can have many causes. If you feel stressed, pause, relax your shoulders, and choose one manageable next step.'],
+  Surprised:['A moment to find your rhythm.','Take your time. Reorient to the task at hand, or step away briefly if you need to reset.'],
+  Tired:['Rest is productive, too.','If you feel sleepy, take a proper rest. An alarm or another cup of coffee is not a substitute for sleep.']
+};
+for (const name of EMOTIONS) {
+  const row = document.createElement('div'); row.className = 'row';
+  row.innerHTML = `<span>${name}</span><div class="bar"><div id="bar${name}"></div></div><output id="score${name}">—</output>`;
+  $('expressionRows').append(row);
+}
+const settings = () => ({ threshold:+$('threshold').value, delay:+$('delay').value*1000, volume:+$('volume').value/100, sound:$('sound').checked, rate:+$('rate').value, breakMinutes:+$('breakInterval').value });
+let model = null, stream = null, timer = null, mode = 'idle', generation = 0;
+let startAt = 0, endAt = 0, nextBreak = 0, lastVideoTime = -1, lastFrameAt = 0, lastSample = 0;
+let closedSince = null, wasClosed = false, alarmActive = false, lastValidAt = null, scores = {};
+let history = [], events = [], alertCount = 0, openSamples = 0, validSamples = 0;
+let audio = null, alarmVoice = null, testUntil = 0, wakeLock = null, latestValid = false, sessionMode = 'idle';
+let lightValue = 100, lightAt = 0;
+const lightCanvas = document.createElement('canvas'); lightCanvas.width = 32; lightCanvas.height = 24;
+const lightCtx = lightCanvas.getContext('2d', { willReadFrequently:true });
+function error(message) { $('error').textContent = message; $('error').hidden = !message; }
+function resetClosure() { closedSince = null; wasClosed = false; lastValidAt = null; alarmActive = false; syncAudio(); }
+function distance(a,b) { return Math.hypot((a.x-b.x)*video.videoWidth,(a.y-b.y)*video.videoHeight); }
+function earFor(p,ids) { const a = ids.map(i=>p[i]); const width = distance(a[0],a[3]); return width > 0 ? (distance(a[1],a[5])+distance(a[2],a[4]))/(2*width) : NaN; }
+function poseValid(p) {
+  const span = Math.abs(p[454].x-p[234].x), mid = (p[454].x+p[234].x)/2;
+  const roll = Math.abs((p[33].y-p[263].y)*video.videoHeight)/Math.max(1,Math.abs((p[33].x-p[263].x)*video.videoWidth));
+  return span > .12 && Math.abs(p[1].x-mid)/span < .24 && roll < .35;
+}
+function classify(categories,ear) {
+  const b = Object.fromEntries(categories.map(c=>[c.categoryName,c.score]));
+  const pair = (a,c) => ((b[a]||0)+(b[c]||0))/2;
+  const Happy = pair('mouthSmileLeft','mouthSmileRight');
+  const Stressed = (pair('browDownLeft','browDownRight')+pair('mouthPressLeft','mouthPressRight'))/2;
+  const Surprised = ((b.jawOpen||0)+pair('eyeWideLeft','eyeWideRight'))/2;
+  const Tired = Math.max(0,Math.min(1,(.30-ear)/.18))*.85;
+  return {Happy,Stressed,Surprised,Tired,Neutral:Math.max(.05,1-Math.max(Happy,Stressed,Surprised,Tired))};
+}
+// Audio-clock envelopes are scheduled ahead for ~1.2 seconds only. If JS freezes,
+// the existing warning decays instead of leaving a stuck oscillator sounding forever.
+async function unlockAudio() {
+  if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+  await audio.resume(); $('audioStatus').textContent = 'Audio enabled';
+}
+function stopTone() {
+  if (alarmVoice) { alarmVoice.oscillator.stop(); alarmVoice.oscillator.disconnect(); alarmVoice.gain.disconnect(); alarmVoice = null; }
+}
+function syncAudio() {
+  const cfg = settings(), test = performance.now() < testUntil;
+  const audible = test || (alarmActive && cfg.sound);
+  if (!audible || !audio || audio.state !== 'running' || cfg.volume === 0) { stopTone(); return; }
+  if (!alarmVoice) {
+    const oscillator = audio.createOscillator(), gain = audio.createGain();
+    oscillator.type = 'square'; gain.gain.value = 0; oscillator.connect(gain).connect(audio.destination); oscillator.start();
+    alarmVoice = { oscillator,gain };
+  }
+  const {oscillator,gain} = alarmVoice, t = audio.currentTime, duration = test ? Math.min(1.2,Math.max(0,(testUntil-performance.now())/1000)) : 1.2;
+  oscillator.frequency.cancelScheduledValues(t); gain.gain.cancelScheduledValues(t);
+  // Bounded synthesized level; the user's hardware determines actual loudness.
+  gain.gain.setValueAtTime(.16*cfg.volume,t);
+  oscillator.frequency.setValueAtTime(Math.floor(t*4)%2 ? 980 : 760,t);
+  gain.gain.setValueAtTime(.16*cfg.volume,t+Math.max(0,duration-.08));
+  gain.gain.linearRampToValueAtTime(0,t+duration);
+}
+function addEvent(text) {
+  events.unshift({ at:new Date().toISOString(),text }); events = events.slice(0,30);
+  $('events').replaceChildren();
+  for (const e of events) { const row = document.createElement('div'); row.className='event'; const label=document.createElement('span'), time=document.createElement('time'); label.textContent=e.text; time.textContent=new Date(e.at).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); row.append(label,time); $('events').append(row); }
+}
+function chart() {
+  let path='', previousValid=false;
+  history.forEach((sample,i)=>{ if (sample.ear === null) {previousValid=false;return;} const x=i/59*600,y=78-Math.min(.45,sample.ear)/.45*70; path+=`${previousValid?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)} `; previousValid=true; });
+  $('chartLine').setAttribute('d',path);
+  const y=78-settings().threshold/.45*70; $('thresholdLine').setAttribute('d',`M0 ${y}H600`);
+}
+function render(ear,valid,quality,now,rawScores={},fps=0) {
+  const cfg=settings(); valid=valid && Number.isFinite(ear); latestValid=valid;
+  if (!valid || !Number.isFinite(ear)) { resetClosure(); scores={}; }
+  else {
+    // Large gaps are unknown observations, never counted as proof of eye closure.
+    if (lastValidAt !== null && now-lastValidAt>1500) { resetClosure(); }
+    lastValidAt=now;
+    wasClosed=ear<cfg.threshold || (wasClosed && ear<cfg.threshold+.025);
+    if (wasClosed && closedSince===null) closedSince=now;
+    if (!wasClosed) closedSince=null;
+    const nextAlarm=closedSince!==null && now-closedSince>=cfg.delay;
+    if(nextAlarm && !alarmActive) { alertCount++; addEvent(`${mode==='demo'?'Demo: ':''}Prolonged eye closure`); }
+    alarmActive=nextAlarm;
+    for (const name of EMOTIONS) scores[name]=scores[name]===undefined ? rawScores[name]||0 : scores[name]*.8+(rawScores[name]||0)*.2;
+  }
+  const closedMs=closedSince===null?0:now-closedSince;
+  $('alarmOverlay').hidden=!alarmActive; $('quality').textContent=quality;
+  $('state').textContent=!valid?'No clear signal':alarmActive?'Wake-up reminder':wasClosed?'Eyes closing':'Eyes open';
+  $('stateDetail').textContent=!valid?'The closure timer is paused, not an all-clear.':alarmActive?'Consider stopping work and taking a proper rest.':mode==='demo'?'Simulated data · not live camera analysis':'Observable eye state · not a measure of focus';
+  $('trackingLabel').textContent=valid?'TRACKING':'UNAVAILABLE'; $('ear').textContent=valid?ear.toFixed(3):'—';
+  $('closedTime').textContent=(closedMs/1000).toFixed(1); $('closureBar').style.width=`${Math.min(100,closedMs/cfg.delay*100)}%`;
+  $('alertCount').textContent=alertCount; $('fps').textContent=`${fps.toFixed(1)} inference fps`;
+  $('audioStatus').textContent=!cfg.sound||cfg.volume===0?'Alarm muted':audio?.state==='running'?'Audio enabled':'Audio unavailable';
+  $('demoFace').classList.toggle('closed',wasClosed);
+  for (const name of EMOTIONS) { $('bar'+name).style.width=`${(scores[name]||0)*100}%`; $('score'+name).textContent=valid?`${Math.round((scores[name]||0)*100)}%`:'—'; }
+  const dominant=valid?Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0]:null;
+  $('dominant').textContent=dominant||'UNAVAILABLE';
+  if (dominant) { $('wellTitle').textContent=tips[dominant][0]; $('wellText').textContent=tips[dominant][1]; }
+  if(now-lastSample>=1000) {
+    // Retain null gaps for a readable, honest history. No facial images are saved.
+    if(lastSample && now-lastSample>2000) history.push({at:Date.now(),ear:null});
+    history.push({at:Date.now(),ear:valid?ear:null}); history=history.slice(-60); lastSample=now;
+    if(valid) { validSamples++; if(!wasClosed)openSamples++; }
+    $('openness').textContent=validSamples?`${Math.round(openSamples/validSamples*100)}%`:'—'; chart();
+  }
+  syncAudio();
+}
+function drawMesh(points) {
+  if(canvas.width!==video.videoWidth || canvas.height!==video.videoHeight) {canvas.width=video.videoWidth;canvas.height=video.videoHeight;}
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(!$('showMesh').checked || !points)return;
+  // Only eye contours + sparse face points to keep drawing inexpensive.
+  ctx.strokeStyle='#c1ef9d'; ctx.lineWidth=1.5;
+  for (const eye of EYES) {ctx.beginPath();eye.forEach((i,n)=>{const p=points[i];ctx[n?'lineTo':'moveTo'](p.x*canvas.width,p.y*canvas.height);});ctx.closePath();ctx.stroke();}
+  ctx.fillStyle='#b4eaa280';for(let i=0;i<points.length;i+=5){ctx.beginPath();ctx.arc(points[i].x*canvas.width,points[i].y*canvas.height,1.3,0,Math.PI*2);ctx.fill();}
+}
+async function acquireWakeLock() {
+  if(!$('wake').checked || !navigator.wakeLock || document.hidden || !['live','demo'].includes(mode))return;
+  try {wakeLock=await navigator.wakeLock.request('screen');wakeLock.addEventListener('release',()=>{wakeLock=null;});}catch{error('Screen wake lock was unavailable. Monitoring still works while this page is running.');}
+}
+function resetBreak() {nextBreak=settings().breakMinutes?performance.now()+settings().breakMinutes*60000:0;$('breakToast').hidden=true;}
+async function stop(message='Session ended. Camera released.') {
+  ++generation;clearTimeout(timer);timer=null;mode='idle';endAt=performance.now();resetClosure();testUntil=0;stopTone();latestValid=false;
+  stream?.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(document.pictureInPictureElement)try{await document.exitPictureInPicture();}catch{}
+  try{await wakeLock?.release();}catch{}wakeLock=null;
+  $('start').hidden=false;$('start').disabled=false;$('stop').hidden=true;$('demo').disabled=false;$('pip').disabled=true;
+  $('modeLabel').textContent='CAMERA OFF';$('standby').hidden=false;$('standbyTitle').textContent='Ready when you are.';$('standbyText').textContent='Your camera feed never leaves this device.';
+  $('quality').textContent=message;$('alarmOverlay').hidden=true;$('state').textContent='Stopped';$('stateDetail').textContent='Monitoring is off. Restart when you’re ready.';
+  for(const name of EMOTIONS){$('bar'+name).style.width='0%';$('score'+name).textContent='—';} $('dominant').textContent='WAITING';
+  $('trackingLabel').textContent='OFF';$('ear').textContent='—';$('closedTime').textContent='0.0';$('closureBar').style.width='0%';$('fps').textContent='— inference fps';
+}
+async function start(demo=false) {
+  await stop();const token=generation;error('');mode='loading';$('start').hidden=true;$('stop').hidden=false;$('demo').disabled=true;$('quality').textContent='Preparing your session…';
+  try {
+    try{await unlockAudio();}catch{error('Audio could not be enabled. Visual warnings still work. Try Test alarm after starting.');}
+    if(token!==generation)return;
+    if(!demo){
+      if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera access needs localhost or HTTPS in a supported browser.');
+      const media=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480},frameRate:{ideal:15,max:20},facingMode:'user'},audio:false});
+      if(token!==generation){media.getTracks().forEach(t=>t.stop());return;}
+      stream=media;stream.getVideoTracks()[0].onended=()=>{if(token===generation){stop();error('Camera disconnected. Reconnect and start again.');}};
+      video.srcObject=stream;await video.play();
+      if(token!==generation)return;
+      if(!model){
+        $('quality').textContent='Loading the on-device vision model…';
+        const loadedVision=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/+esm');
+        if(token!==generation)return;
+        const files=await loadedVision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm');
+        if(token!==generation)return;
+        const loaded=await loadedVision.FaceLandmarker.createFromOptions(files,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'},runningMode:'VIDEO',numFaces:2,outputFaceBlendshapes:true,minFaceDetectionConfidence:.6,minTrackingConfidence:.6});
+        if(token!==generation){loaded.close();return;}model=loaded;
+      }
+    }
+    if(token!==generation)return;
+    mode=demo?'demo':'live';sessionMode=mode;startAt=performance.now();endAt=0;lastFrameAt=0;lastVideoTime=-1;lastSample=0;lightAt=0;scores={};history=[];events=[];alertCount=0;openSamples=0;validSamples=0;resetBreak();
+    $('events').replaceChildren();addEvent(demo?'Demo session started':'Camera session started');
+    $('modeLabel').textContent=demo?'DEMO · SYNTHETIC SIGNALS':'LIVE · LOCAL PROCESSING';$('standby').hidden=!demo;$('standbyTitle').textContent='A practice moment.';$('standbyText').textContent='Synthetic closure every 22 seconds.';
+    $('pip').disabled=demo || !document.pictureInPictureEnabled;acquireWakeLock();
+    // A timer continues attempting work when rAF would be paused. Hidden-page
+    // throttling remains browser-controlled and cannot be bypassed reliably.
+    async function tick(){
+      if(token!==generation)return;
+      const now=performance.now();
+      try{
+        if(demo){const phase=((now-startAt)/1000)%22,ear=phase>12&&phase<16?.13:.31+Math.sin(now/900)*.015;render(ear,true,'Demo · synthetic signals',now,{Neutral:ear<.22?.12:.82,Happy:.14,Stressed:.06,Surprised:.03,Tired:ear<.22?.9:.06},lastFrameAt?1000/(now-lastFrameAt):8);lastFrameAt=now;}
+        else if(video.readyState<2 || video.currentTime===lastVideoTime){if(now-lastFrameAt>1500){render(null,false,'Camera frames paused · monitoring unavailable',now);drawMesh(null);}}
+        else {
+          const elapsed=lastFrameAt?now-lastFrameAt:0, fps=elapsed?1000/elapsed:settings().rate;
+          lastVideoTime=video.currentTime;lastFrameAt=now;
+          const result=model.detectForVideo(video,now),p=result.faceLandmarks[0];
+          if(now-lightAt>1000){lightCtx.drawImage(video,0,0,32,24);const px=lightCtx.getImageData(0,0,32,24).data;let sum=0;for(let i=0;i<px.length;i+=4)sum+=.2126*px[i]+.7152*px[i+1]+.0722*px[i+2];lightValue=sum/(32*24);lightAt=now;}
+          let quality='Good tracking',valid=true;
+          if(!p){valid=false;quality='No face · position yourself in view';}
+          else if(result.faceLandmarks.length!==1){valid=false;quality='Multiple faces · use one person';}
+          else if(lightValue<35){valid=false;quality='Low light · brighten your face';}
+          else if(!poseValid(p)){valid=false;quality='Face forward · move closer';}
+          else if(elapsed>1500){valid=false;quality='Long frame gap · reacquiring tracking';}
+          const ear=p?(earFor(p,EYES[0])+earFor(p,EYES[1]))/2:null;
+          render(ear,valid,quality,now,valid?classify(result.faceBlendshapes[0]?.categories||[],ear):{},fps);drawMesh(p);
+        }
+      }catch(e){await stop();error(`Tracking stopped: ${e.message}. Please restart.`);return;}
+      if(token===generation)timer=setTimeout(tick,document.hidden?250:1000/settings().rate);
+    }
+    tick();
+  }catch(e){if(token!==generation)return;await stop();error(e.name==='NotAllowedError'?'Camera permission was denied. Allow it in your browser or try the demo.':`Could not start: ${e.message}. Check your connection or use demo mode.`);}
+}
+$('start').onclick=()=>start();$('demo').onclick=()=>start(true);$('stop').onclick=()=>stop();
+$('pip').onclick=async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{error('Floating video is not supported or was blocked. Keep this window visible beside your work instead.');}};
+$('testAlarm').onclick=async()=>{try{await unlockAudio();testUntil=performance.now()+1000;syncAudio();setTimeout(syncAudio,1050);}catch{error('Audio could not start. Check browser permissions and device audio.');}};
+for (const id of ['threshold','delay','volume']) $(id).oninput=()=>{
+  $('thresholdValue').textContent=`${settings().threshold.toFixed(2)} EAR`;$('delayValue').textContent=`${(settings().delay/1000).toFixed(1)} s`;$('volumeValue').textContent=`${Math.round(settings().volume*100)}%`;
+  if(id!=='volume')resetClosure();syncAudio();chart();
+};
+$('sound').onchange=syncAudio;$('showMesh').onchange=()=>{if(!$('showMesh').checked)ctx.clearRect(0,0,canvas.width,canvas.height);};
+$('wake').onchange=async()=>{if($('wake').checked){if(!navigator.wakeLock)error('Screen wake lock is not supported in this browser.');else await acquireWakeLock();}else{try{await wakeLock?.release();}catch{}}};
+$('breakInterval').onchange=resetBreak;
+$('takeBreak').onclick=()=>{$('breakToast').hidden=false;};$('dismissBreak').onclick=resetBreak;
+$('export').onclick=()=>{const data={createdAt:new Date().toISOString(),sessionMode,durationSeconds:startAt?Math.round(((endAt||performance.now())-startAt)/1000):0,settings:settings(),events,earSamples:history,notice:'Expression indicators do not measure mental state; open-eye samples do not measure focus. Background monitoring is best-effort.'};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='deskwise-session.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+// UI clock isn't used to decide eye closure; only actual valid frame timestamps are.
+setInterval(()=>{
+  const active=['live','demo'].includes(mode), now=performance.now(), seconds=startAt?Math.floor(((endAt||now)-startAt)/1000):0;
+  $('sessionTime').textContent=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(v=>String(v).padStart(2,'0')).join(':');
+  if(active && nextBreak && now>=nextBreak){$('breakToast').hidden=false;addEvent('Gentle break reminder');nextBreak=now+settings().breakMinutes*60000;}
+  const remaining=Math.max(0,Math.ceil((nextBreak-now)/1000));
+  $('breakCountdown').textContent=!settings().breakMinutes?'Reminders off':!active?`After ${settings().breakMinutes} minutes of a session`:`${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,'0')} until a little reset`;
+  if(active && lastFrameAt && now-lastFrameAt>1500){resetClosure();$('alarmOverlay').hidden=true;$('state').textContent='Tracking delayed';$('stateDetail').textContent='No reliable current signal. Keep this page visible.';$('trackingLabel').textContent='DELAYED';}
+},1000);
+document.addEventListener('visibilitychange',()=>{
+  $('backgroundNotice').textContent=document.hidden?'This tab is hidden. Monitoring attempts to continue, but browser throttling can delay or prevent alarms.':'Background monitoring is best-effort: browsers can suspend hidden tabs. Keep this window visible alongside your work for more dependable monitoring. No webpage can guarantee a sleep alarm.';
+  if(!document.hidden){if(lastValidAt!==null && performance.now()-lastValidAt>1500)resetClosure();acquireWakeLock();}
+});
+// Release physical resources on navigation; bfcache restoration is intentionally stopped.
+window.addEventListener('pagehide',()=>{stop();model?.close();model=null;audio?.close();audio=null;});
+chart();
+</script>
+</body>
+</html>

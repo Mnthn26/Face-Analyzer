@@ -1,0 +1,50 @@
+name: Publish Deskwise website
+
+on:
+  push:
+    branches: [arena/01a0e1c6-face-analyzer]
+  workflow_dispatch:
+
+# A newer push may replace an in-progress build, but never cancels an active deploy.
+concurrency:
+  group: deskwise-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Test and build static website
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Pure Node.js tests and build: no npm install or dependency scripts needed.
+      - run: npm test
+      - run: node scripts/build-site.mjs
+        env:
+          DESKWISE_BASE_PATH: /Face-Analyzer/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Publish to GitHub Pages
+    if: github.ref == 'refs/heads/arena/01a0e1c6-face-analyzer'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - name: Deploy tested website
+        id: publish
+        uses: actions/deploy-pages@v4
