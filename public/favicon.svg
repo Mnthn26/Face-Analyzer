@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Deskwise">
+  <rect width="64" height="64" rx="14" fill="#111715"/>
+  <!-- Deskwise "D" monogram in the site's accent green -->
+  <path d="M22 14 H36 a18 18 0 0 1 0 36 H22 Z M30 22 V42 H36 a10 10 0 0 0 0 -20 Z" fill="#c1ef9d"/>
+</svg>

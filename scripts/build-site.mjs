@@ -13,9 +13,11 @@ if (!html.includes('<title>Deskwise') || !html.includes('getUserMedia')) {
 // Remove only the fixed, generated site directory to prevent stale files from publishing.
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
+const favicon = await readFile(new URL('public/favicon.svg', root), 'utf8');
 await Promise.all([
   writeFile(new URL('index.html', output), html),
   writeFile(new URL('desk-assistant.html', output), html),
+  writeFile(new URL('favicon.svg', output), favicon),
   writeFile(new URL('_headers', output), `/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
