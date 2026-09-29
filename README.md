@@ -1,3 +1,5 @@
+> **Want a public website instead of running VS Code?** See [DEPLOY.md](DEPLOY.md). The deployment build (`npm run build`) now publishes Deskwise as the homepage in `site/`. Netlify and Vercel configuration is included; use branch `arena/01a0e1c6-face-analyzer`, not `main`. The legacy React driver build is available with `npm run build:driver`.
+
 # Deskwise · Single-file AI Desk Assistant
 
 The new **desk/study assistant** is in [`public/desk-assistant.html`](public/desk-assistant.html). It is a complete, standalone HTML/CSS/JavaScript application: no React build, package installation, backend, API key, or audio assets are required to run this file. The original CoPilot driver dashboard remains available at the repository root.
@@ -48,7 +50,7 @@ Keep the page visible alongside your work for more dependable operation. Floatin
 
 ### Validation
 
-`npm test` runs both the original vision tests and tests that extract and execute the actual inline JavaScript from the standalone file. Desk tests cover pixel-correct EAR, continuous closure, opening/reset behavior, long background gaps, invalid tracking, and expression-score bounds. A lightweight DOM harness tests logic, not browser rendering or real hardware. `npm run build` also copies the standalone file to `dist/desk-assistant.html`.
+`npm test` runs both the original vision tests and tests that extract and execute the actual inline JavaScript from the standalone file. Desk tests cover pixel-correct EAR, continuous closure, opening/reset behavior, long background gaps, invalid tracking, and expression-score bounds. A lightweight DOM harness tests logic, not browser rendering or real hardware. `npm run build` publishes the standalone file as `site/index.html` and `site/desk-assistant.html`.
 
 Real webcam inference, audio output, picture-in-picture, and background throttling must be verified on the user's actual browser/device. Automated browser/model downloads were blocked by TLS network failures in this sandbox; no production/hardware validation is claimed.
 
@@ -70,8 +72,8 @@ npm run dev
 # Open http://localhost:5173 on the same computer.
 
 npm test          # EAR, time-based alarms, resets, hysteresis, expression rules
-npm run build    # Production bundle in dist/
-npm run preview  # Preview the production build
+npm run build:driver # Original driver production bundle in dist/
+npm run preview  # Preview the Deskwise production site (run npm run build first)
 ```
 
 The server binds to `0.0.0.0`. The Arena HTTPS preview domain is allowed. Browser code makes no localhost backend requests.
