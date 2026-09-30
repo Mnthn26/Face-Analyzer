@@ -26,7 +26,7 @@ This is an expected URL, not a claim that it is already live. A custom domain ca
 - A concurrency group prevents overlapping deployment jobs. An active deploy is not canceled midway by a newer push.
 - `scripts/build-site.mjs` cleans only the fixed generated `site/` directory and copies the standalone website (including the favicon), never the repository, tests, credentials, or `.git`.
 - `DESKWISE_BASE_PATH=/Face-Analyzer/` handles GitHub's project URL prefix. The prefix is validated against external URLs, path traversal, and HTML injection before insertion into the generated error page.
-- HTML/CSS/JavaScript remain a standalone application. Session information lives in memory. Camera frames are not uploaded.
+- HTML/CSS/JavaScript remain a standalone application. Settings and recent session history persist in the visitor's browser localStorage (`deskwise.v1`); a **Clear local data** button is provided. Camera frames stay in memory only and are never uploaded.
 - GitHub Pages does not apply Netlify `_headers` rules. Those remain for optional alternate hosting, but are not claimed as active response headers on Pages.
 
 ## Verification

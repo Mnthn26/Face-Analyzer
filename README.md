@@ -40,7 +40,7 @@ Use localhost or HTTPS, not a double-clicked `file://` URL. Initial vision-model
 - Eye-openness sample percentage and a recent EAR chart, explicitly **not a measure of focus or productivity**.
 - Contextual well-being cards, customizable in-page break reminders, optional screen wake lock and picture-in-picture camera view.
 - Synthetic demo: closure during seconds 12–16 of each 22-second cycle, default alarm around second 14. With a delay longer than four seconds this demo intentionally will not trigger.
-- In-memory event history and explicit JSON export. No camera image recording or upload.
+- Session settings, event history, and recent EAR samples persist in the visitor's browser localStorage (`deskwise.v1`) with a **Clear local data** button. Camera frames stay in memory only — no camera image recording or upload. Explicit JSON export remains available.
 
 ### Background execution: important limitation
 
