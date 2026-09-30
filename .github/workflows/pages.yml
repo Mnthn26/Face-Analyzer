@@ -2,7 +2,7 @@ name: Publish Deskwise website
 
 on:
   push:
-    branches: [arena/01a0e1c6-face-analyzer]
+    branches: [main]
   workflow_dispatch:
 
 # A newer push may replace an in-progress build, but never cancels an active deploy.
@@ -34,7 +34,7 @@ jobs:
 
   deploy:
     name: Publish to GitHub Pages
-    if: github.ref == 'refs/heads/arena/01a0e1c6-face-analyzer'
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10

@@ -1,4 +1,4 @@
-> **Use Deskwise as a public website with GitHub Pages:** follow the one-time owner setup in [DEPLOY.md](DEPLOY.md). No Netlify/Vercel account or local server is required for normal use after publishing. The Pages workflow tests and deploys branch `arena/01a0e1c6-face-analyzer`. **Publishing is currently blocked by missing repository-administration permissions; the repository is still private.**
+> **Public website:** Deskwise is published with GitHub Pages. Once the Pages source is set to **GitHub Actions** and the workflow on `main` succeeds, the live site is at **https://mnthn26.github.io/Face-Analyzer/**. No Netlify/Vercel account or local server is required for normal use after publishing. See [DEPLOY.md](DEPLOY.md) for the one-time owner setup.
 
 # Deskwise · Single-file AI Desk Assistant
 
